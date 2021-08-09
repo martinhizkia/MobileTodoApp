@@ -259,7 +259,7 @@ class _HomeState extends State<Home> {
                                             maxLength: 20,
                                             decoration: InputDecoration(
                                               // icon: Icon(Icons.favorite),
-                                              labelText: 'Title',
+                                              labelText: 'Description',
 
                                               suffixIcon: Icon(
                                                 Icons.check_circle,
@@ -495,7 +495,7 @@ class _HomeState extends State<Home> {
                                       todo.time = time;
                                       if (todo.title == "" || todo.desc == "") {
                                         Fluttertoast.showToast(
-                                          msg: "This is Toast messaget",
+                                          msg: "Fill all the Inputs first!",
                                           toastLength: Toast.LENGTH_SHORT,
                                           gravity: ToastGravity.CENTER,
                                         );
@@ -503,6 +503,8 @@ class _HomeState extends State<Home> {
                                         setState(() {
                                           addTodo(todo);
                                           Navigator.pop(context);
+                                          _textTitleController.text = "";
+                                          _textDescController.text = "";
                                         });
                                       }
                                     },
@@ -538,7 +540,7 @@ class _HomeState extends State<Home> {
                                   margin: EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 10),
                                   child: Text(
-                                    "Add to do",
+                                    "Add Checklist",
                                     style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold),

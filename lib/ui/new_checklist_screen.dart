@@ -72,8 +72,12 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
                                 shrinkWrap: true,
                                 physics: BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  return buildItemView(
-                                      widget.listt[index], index);
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                    child: buildItemView(
+                                        widget.listt[index], index),
+                                  );
                                 }))
                   ],
                 ),
@@ -86,7 +90,20 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
       key: Key('${item.hashCode}'),
       background: Container(
           alignment: Alignment.centerLeft,
-          child: Icon(Icons.delete),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                ),
+                SizedBox(width: 10),
+                Text("Delete",
+                    style: TextStyle(color: Colors.white, fontSize: 17))
+              ],
+            ),
+          ),
           color: Colors.pink),
       onDismissed: (direction) => widget.deleteChecklist(item),
       direction: DismissDirection.startToEnd,
@@ -118,24 +135,27 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
   }
 
   Widget buildChecklistCard(Checklist item, int index) {
-    return ListTile(
-      title: Text(
-        item.item,
-        key: Key('item-$index'),
-        style: TextStyle(
-            color: item.isComplete ? Colors.grey : Colors.black,
-            decoration: item.isComplete ? TextDecoration.lineThrough : null),
-      ),
-      trailing: InkWell(
-        child: Icon(
-          item.isComplete ? Icons.check_box : Icons.check_box_outline_blank,
-          key: Key('completed-icon-$index'),
+    return Container(
+      decoration: BoxDecoration(border: Border.all(color: Colors.blueGrey)),
+      child: ListTile(
+        title: Text(
+          item.item,
+          key: Key('item-$index'),
+          style: TextStyle(
+              color: item.isComplete ? Colors.grey : Colors.black,
+              decoration: item.isComplete ? TextDecoration.lineThrough : null),
         ),
-        onTap: () {
-          setState(() {
-            widget.updateChecklist(item);
-          });
-        },
+        trailing: InkWell(
+          child: Icon(
+            item.isComplete ? Icons.check_box : Icons.check_box_outline_blank,
+            key: Key('completed-icon-$index'),
+          ),
+          onTap: () {
+            setState(() {
+              widget.updateChecklist(item);
+            });
+          },
+        ),
       ),
     );
   }

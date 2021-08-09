@@ -397,8 +397,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: fontColor),
                           ),
-                          Text("Description Description",
-                              style: TextStyle(color: fontColor))
+                          Text(todo.desc, style: TextStyle(color: fontColor))
                         ],
                       )
                     ],
